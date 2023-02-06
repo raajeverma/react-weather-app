@@ -1,0 +1,219 @@
+import React from "react";
+import { useEffect, useRef } from "react";
+import { useState } from "react";
+import "./App.css";
+import sun from "./assets/sun.png";
+
+function App() {
+  const inputValue = useRef();
+  const [input, setInput] = useState("Delhi");
+  const [weatherData,setWeatherData]=useState()
+  const {main, name, sys, visibility, weather, wind }=weatherData
+console.log(weatherData)
+console.log(input)
+  
+  useEffect(()=>{
+    let url=`https://api.openweathermap.org/data/2.5/weather?q=${input}&units=metric&appid=03718c205b1a7c568d376cd2f07c2305`;
+    fetch(url)
+    .then((res)=> res.json())
+    .then(data=> setWeatherData(data))
+  },[])
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    setInput(inputValue.current.value)
+    console.log(weatherData);
+  }
+
+  return (
+    <div className="App">
+      <header>
+        <div>V Weather</div>
+        <form className="search-box" onSubmit={handleSubmit}>
+          <input
+            type="text"
+            placeholder="City..."
+            // onChange={(e) => setInput(e.target.value)}
+            ref={inputValue}
+          />
+          <button className="search-btn">
+            <i className="fa-solid fa-magnifying-glass"></i>
+          </button>
+        </form>
+      </header>
+
+      <div className="weather-info">
+        {/* <div className='weather-icon'><i className="fa-solid fa-sun"></i> </div> */}
+        <div>
+          <div className="weather-icon">
+            <i className="fa-solid fa-sun"></i>{" "}
+            <img
+                  src={`http://openweathermap.org/img/wn/${weather[0].icon}@2x.png`}
+                  alt='weather'
+                />
+          </div>
+          <div className="weather-mood">{weather[0].main}</div>
+        </div>
+
+        <div className="weather-status">
+          <div className="city">{name}, {sys.country}</div>
+          <div className="small">{new Date().toLocaleString()}</div>
+          <div className="temp-info">
+            <div className="deg">{main.temp}&deg;C</div>
+            <div>
+              <div className="small">Feels Like : {main.feels_like}&deg;C</div>
+              <div className="small">H: {main.temp_max}&deg;C &nbsp; L: {main.temp_min}&deg;C</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="weather-info-extra">
+        <div className="sun-rise-set">
+          <span>
+            Sunrise <br /> {sys.sunrise} AM
+          </span>
+          <img src={sun} alt="sun" />
+          <span>
+            Sunset <br /> {sys.sunset} PM
+          </span>
+        </div>
+        <div className="weather-info-extra-extra">
+          <div className="weather-info-extra-box">
+            <i className="fa-solid fa-wind"></i>{" "}
+            <span>
+              {wind.speed} m/s<span>Wind Speed</span>
+            </span>
+          </div>
+          <div className="weather-info-extra-box">
+            <i className="fa-solid fa-angles-down"></i>{" "}
+            <span>
+              {main.pressure} hPa<span>Pressure</span>
+            </span>
+          </div>
+          <div className="weather-info-extra-box">
+            <i className="fa-regular fa-eye"></i>{" "}
+            <span>
+              {visibility/1000} KM<span>Visiblity</span>
+            </span>
+          </div>
+          <div className="weather-info-extra-box">
+            <i className="fa-solid fa-droplet"></i>{" "}
+            <span>
+              {main.humidity} %<span>Humidity</span>
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div className="weather-reports-title">
+        <span>Today</span>
+        <span>Tomorrow</span>
+        <span>Next 7 days</span>
+      </div>
+      <div className="weather-info-hourly">
+        <div className="weather-hour-box">
+          <div>6PM</div>
+          <div>
+            <i className="fa-solid fa-cloud"></i>
+          </div>
+          <div>16&deg;C</div>
+        </div>
+
+        <div className="weather-hour-box">
+          <div>6PM</div>
+          <div>
+            <i className="fa-solid fa-cloud"></i>
+          </div>
+          <div>16&deg;C</div>
+        </div>
+        <div className="weather-hour-box active">
+          <div>6PM</div>
+          <div>
+            <i className="fa-solid fa-cloud"></i>
+          </div>
+          <div>16&deg;C</div>
+        </div>
+        <div className="weather-hour-box">
+          <div>6PM</div>
+          <div>
+            <i className="fa-solid fa-cloud"></i>
+          </div>
+          <div>16&deg;C</div>
+        </div>
+        <div className="weather-hour-box">
+          <div>6PM</div>
+          <div>
+            <i className="fa-solid fa-cloud"></i>
+          </div>
+          <div>16&deg;C</div>
+        </div>
+        <div className="weather-hour-box">
+          <div>6PM</div>
+          <div>
+            <i className="fa-solid fa-cloud"></i>
+          </div>
+          <div>16&deg;C</div>
+        </div>
+        <div className="weather-hour-box">
+          <div>6PM</div>
+          <div>
+            <i className="fa-solid fa-cloud"></i>
+          </div>
+          <div>16&deg;C</div>
+        </div>
+        <div className="weather-hour-box">
+          <div>6PM</div>
+          <div>
+            <i className="fa-solid fa-cloud"></i>
+          </div>
+          <div>16&deg;C</div>
+        </div>
+        <div className="weather-hour-box">
+          <div>6PM</div>
+          <div>
+            <i className="fa-solid fa-cloud"></i>
+          </div>
+          <div>16&deg;C</div>
+        </div>
+        <div className="weather-hour-box">
+          <div>6PM</div>
+          <div>
+            <i className="fa-solid fa-cloud"></i>
+          </div>
+          <div>16&deg;C</div>
+        </div>
+        <div className="weather-hour-box">
+          <div>6PM</div>
+          <div>
+            <i className="fa-solid fa-cloud"></i>
+          </div>
+          <div>16&deg;C</div>
+        </div>
+        <div className="weather-hour-box">
+          <div>6PM</div>
+          <div>
+            <i className="fa-solid fa-cloud"></i>
+          </div>
+          <div>16&deg;C</div>
+        </div>
+        <div className="weather-hour-box">
+          <div>6PM</div>
+          <div>
+            <i className="fa-solid fa-cloud"></i>
+          </div>
+          <div>16&deg;C</div>
+        </div>
+        <div className="weather-hour-box">
+          <div>6PM</div>
+          <div>
+            <i className="fa-solid fa-cloud"></i>
+          </div>
+          <div>16&deg;C</div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default App;
