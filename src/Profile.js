@@ -4,7 +4,7 @@ export const Profile = () => {
   return (
     <div className="profile-area">
       <a
-        href="https://github.com/raajeverma"
+        href="https://github.com/realverma"
         target="_blank"
         rel="noopener noreferrer"
         title="Github Profile"
